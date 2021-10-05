@@ -24,9 +24,11 @@ PyDispatcher==2.0.5
 pyOpenSSL==21.0.0
 queuelib==1.6.2
 Scrapy==2.5.0
+selenium==3.141.0
 service-identity==21.1.0
 six==1.16.0
 Twisted==21.7.0
 typing-extensions==3.10.0.2
+urllib3==1.26.7
 w3lib==1.22.0
 zope.interface==5.4.0

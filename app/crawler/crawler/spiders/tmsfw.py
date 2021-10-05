@@ -2,6 +2,7 @@ import time
 import scrapy
 import re
 from crawler.items import TmsfIndexItem, TmsfLouPanItem
+from crawler.config import app
 
 class TmsfwSpider(scrapy.Spider):
     name = 'tmsfw'
@@ -15,13 +16,7 @@ class TmsfwSpider(scrapy.Spider):
         
         # 爬取最新开盘页面
         self.log(f"最新开盘链接: {item['openReportLink']}")
-
-        # 记录cookies
-        cookies = "gr_user_id=060e0598-a2b7-4cab-9145-e9527b93a5fc; UM_distinctid=17c31a9ef216c-072bbe135d445b-1c3b6650-1fa400-17c31a9ef23ff5; pgv_pvid=28064038; Hm_lvt_5bbc90d068807d82c72909ecd298e11a=1632921176; b61f24991053b634_gr_last_sent_cs1=20750024; Hm_lvt_bbb8b9db5fbc7576fd868d7931c80ee1=1632920784,1633358717; CNZZDATA1253675216=2023168956-1632912122-http%253A%252F%252Fwww.tmsf.com%252F%7C1633357030; BSFIT_EXPIRATION=1633451816686; BSFIT_DEVICEID=VZS2TktpbJtCNo6w5-rU3bY9UZIUsiheA-pbSIU7ICTCoBdekSGh-eVIMbjN3ELIvK4Zn6n0ncqhob7nTDvtoFV-_8pxUCr70PfCvwYgNRFsV0bu-Y7XPXH48aFI8Q6j_CjXHbLplfs3QgcIfGM9dbb7h-fOOe5g; b61f24991053b634_gr_session_id=b90e4fd4-6670-4d8a-a22d-a98ce36213d9; b61f24991053b634_gr_session_id_b90e4fd4-6670-4d8a-a22d-a98ce36213d9=true; JSESSIONID=592E8EEEF83F4A135AAB9352D747E85E; Hm_lpvt_bbb8b9db5fbc7576fd868d7931c80ee1=1633404485; BSFIT_nokgz=4yRO4O6wLgAG4bRaL6,4gnw4gnw4gnw4n,4gnw4gnw4gnw4n,4gnaEyPw4gAeLw,4gnSLODw4gAe46,4gz14yKw4gzO4n,4gzSEgnw4gz14n,4gzw4y4w4gzeLD"
-        # 转换成字典
-        cookies = {i.split("=")[0]:i.split("=")[1] for i in cookies.split("; ")}
-        print(cookies)
-        yield scrapy.Request(item['openReportLink'], cookies=cookies, callback=self.parse_open_report)
+        yield scrapy.Request(item['openReportLink'], cookies=app.COOKIES, callback=self.parse_open_report)
 
     # 解析最新开盘页面内容
     def parse_open_report(self, response):
