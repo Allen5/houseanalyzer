@@ -1,5 +1,10 @@
-server:
-  port: 9527
+# 日志配置
+logging:
+  file:
+    name: "logs/application.log"
+  pattern:
+    console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n "
+    file: "%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n"
 
 # 爬虫设置
 zone:
@@ -12,11 +17,3 @@ zone:
         index-url: "http://www.tmsf.com"
         # 抓取500条预售证数据
         pre-sale-count: 500
-
-# 日志配置
-logging:
-  file:
-    name: "logs/application.log"
-  pattern:
-    console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n "
-    file: "%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n"

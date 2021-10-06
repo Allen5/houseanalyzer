@@ -1,8 +1,11 @@
 package zone.motionless.houseanalyzer.vo;
 
+import lombok.Data;
+
 /**
  * 楼盘预售证信息
  */
+@Data
 public class LouPanPreSaleItem {
 
     /**
@@ -39,6 +42,11 @@ public class LouPanPreSaleItem {
      * 开发商
      */
     private String DeveloperCompany;
+
+    /**
+     * 楼盘类型
+     */
+    private String type;
 
     /**
      * 地址
