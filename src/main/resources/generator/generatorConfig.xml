@@ -1,0 +1,82 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="useMapperCommentGenerator" value="true"/>
+
+<!--        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+<!--&lt;!&ndash;            &lt;!&ndash;配置后生成的 Mapper 接口都会自动继承上改接口&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <property name="mappers" value="com.cspiretech.centralsystem.service.auth.impl.base.MyMapper"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;是否区分大小写，默认值 false。如果数据库区分大小写，这里就需要配置为 true，这样当表名为 USER 时，会生成 @Table(name = "USER") 注解，否则使用小写 user 时会找不到表&ndash;&gt;-->
+<!--            <property name="caseSensitive" value="true"/>-->
+<!--            &lt;!&ndash;是否强制生成注解，默认 false，如果设置为 true，不管数据库名和字段名是否一致，都会生成注解（包含 @Table 和 @Column）&ndash;&gt;-->
+<!--            <property name="forceAnnotation" value="true"/>-->
+<!--            &lt;!&ndash;在生成的 model中，增加字段名的常量，便于使用 Example 拼接查询条件的时候使用&ndash;&gt;-->
+<!--            <property name="generateColumnConsts" value="true"/>-->
+<!--            &lt;!&ndash;是否生成默认的属性的静态方法&ndash;&gt;-->
+<!--            &lt;!&ndash;<property name="generateDefaultInstanceMethod" value="true"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;开始和结束分隔符，对于有关键字的情况下适用&ndash;&gt;-->
+<!--            <property name="beginningDelimiter" value="`"/>-->
+<!--            <property name="endingDelimiter" value="`"/>-->
+<!--            &lt;!&ndash;使用Data注解时，Getter,Setter,ToString,EqualsAndHashCode注解无效&ndash;&gt;-->
+<!--            &lt;!&ndash;property name="lombok" value="Getter,Setter,ToString,Accessors,EqualsAndHashCode"/>&ndash;&gt;-->
+<!--            <property name="lombok" value="Data,Accessors"/>-->
+<!--            &lt;!&ndash;是否生成swagger注解,包括 @ApiModel和@ApiModelProperty&ndash;&gt;-->
+<!--            &lt;!&ndash;<property name="swagger" value="true"/>&ndash;&gt;-->
+<!--        </plugin>-->
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/house_analyze?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;nullCatalogMeansCurrent=true"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="zone.motionless.houseanalyzer.model"
+                            targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="zone.motionless.houseanalyzer.mapper"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName=""></table>
+
+        <!-- 楼盘信息表 -->
+<!--        <table tableName="loupan" domainObjectName="LouPan"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               enableDeleteByExample="false">-->
+<!--        </table>-->
+
+<!--        &lt;!&ndash; 预售证信息表 &ndash;&gt;-->
+<!--        <table tableName="pre_sale_info" domainObjectName="PreSaleInfo"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               enableDeleteByExample="false">-->
+<!--        </table>-->
+
+<!--        &lt;!&ndash; 房价信息表 &ndash;&gt;-->
+<!--        <table tableName="house_price" domainObjectName="HousePrice"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               enableDeleteByExample="false">-->
+<!--        </table>-->
+
+<!--        &lt;!&ndash; 爬虫配置信息表 &ndash;&gt;-->
+<!--        <table tableName="crawler_config" domainObjectName="CrawlerConfig"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               enableDeleteByExample="false">-->
+<!--        </table>-->
+
+    </context>
+</generatorConfiguration>
+

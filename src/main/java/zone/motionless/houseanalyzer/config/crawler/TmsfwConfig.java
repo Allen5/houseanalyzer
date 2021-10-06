@@ -12,7 +12,7 @@ public class TmsfwConfig {
     /**
      * cookie字符串
      */
-    private String cookieStr;
+    private String domain;
 
     /**
      * 首页url

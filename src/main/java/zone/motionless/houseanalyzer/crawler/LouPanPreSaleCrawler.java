@@ -1,4 +1,4 @@
-package zone.motionless.houseanalyzer.service;
+package zone.motionless.houseanalyzer.crawler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import zone.motionless.houseanalyzer.config.crawler.TmsfwConfig;
+import zone.motionless.houseanalyzer.service.CrawlerConfigService;
 import zone.motionless.houseanalyzer.vo.LouPanPreSaleItem;
 
 import java.util.ArrayList;
@@ -27,10 +29,13 @@ public class LouPanPreSaleCrawler {
     @Autowired
     private TmsfwConfig tmsfwConfig;
 
+    @Autowired
+    private CrawlerConfigService crawlerConfigService;
+
     /**
      * 驱动器
      */
-    private WebDriver driver = new ChromeDriver();
+    private WebDriver driver;
 
     /**
      * 存储爬取到的楼盘信息
@@ -41,6 +46,7 @@ public class LouPanPreSaleCrawler {
      * 开始爬取楼盘预售证信息
      */
     public void start() {
+        this.initDriver();
         // step0 - 打开透明售房网网页
         driver.get(tmsfwConfig.getIndexURL());
         driver.manage().timeouts().implicitlyWait(3L, TimeUnit.SECONDS);
@@ -153,11 +159,22 @@ public class LouPanPreSaleCrawler {
      * 设置cookie
      */
     private void setCookies() {
-        String[] cookieItems = tmsfwConfig.getCookieStr().split(";");
-        for (String cookieItem : cookieItems) {
-            String[] item = cookieItem.split("=");
-            log.info("cookie item: {}={}", item[0], item[1]);
-            driver.manage().addCookie(new Cookie(item[0], item[1]));
+        List<Cookie> cookies = crawlerConfigService.getCookies(tmsfwConfig.getDomain());
+        if ( CollectionUtils.isEmpty(cookies) ) {
+            log.warn("no cookies stored for domain: {}", tmsfwConfig.getDomain());
+            return ;
+        }
+        for (Cookie cookie: cookies) {
+            driver.manage().addCookie(cookie);
+        }
+    }
+
+    /**
+     * 初始化driver
+     */
+    private void initDriver() {
+        if ( driver == null ) {
+            driver = new ChromeDriver();
         }
     }
 
