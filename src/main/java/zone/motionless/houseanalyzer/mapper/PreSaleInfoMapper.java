@@ -43,4 +43,12 @@ public interface PreSaleInfoMapper {
      * @mbg.generated Wed Oct 06 19:59:29 CST 2021
      */
     int updateByPrimaryKey(PreSaleInfo record);
+
+    /**
+     * 根据预售许可证获取信息
+     * @param licence
+     * @return
+     */
+    PreSaleInfo selectByLicence(String licence);
+
 }

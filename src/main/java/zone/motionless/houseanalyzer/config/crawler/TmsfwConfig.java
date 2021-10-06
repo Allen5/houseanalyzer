@@ -17,7 +17,12 @@ public class TmsfwConfig {
     /**
      * 首页url
      */
-    private String indexURL;
+    private String indexUrl;
+
+    /**
+     * 新房链接
+     */
+    private String newHouseUrl;
 
     /**
      * 爬取预售证信息条数

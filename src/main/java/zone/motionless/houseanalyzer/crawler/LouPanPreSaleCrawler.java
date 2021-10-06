@@ -1,16 +1,14 @@
 package zone.motionless.houseanalyzer.crawler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import zone.motionless.houseanalyzer.config.crawler.TmsfwConfig;
 import zone.motionless.houseanalyzer.service.CrawlerConfigService;
+import zone.motionless.houseanalyzer.service.LouPanService;
 import zone.motionless.houseanalyzer.vo.LouPanPreSaleItem;
 
 import java.util.ArrayList;
@@ -32,6 +30,9 @@ public class LouPanPreSaleCrawler {
     @Autowired
     private CrawlerConfigService crawlerConfigService;
 
+    @Autowired
+    private LouPanService louPanService;
+
     /**
      * 驱动器
      */
@@ -48,7 +49,7 @@ public class LouPanPreSaleCrawler {
     public void start() {
         this.initDriver();
         // step0 - 打开透明售房网网页
-        driver.get(tmsfwConfig.getIndexURL());
+        driver.get(tmsfwConfig.getIndexUrl());
         driver.manage().timeouts().implicitlyWait(3L, TimeUnit.SECONDS);
         // step1 - 获取预售证页面URL
         String preSaleUrl = driver
@@ -62,20 +63,26 @@ public class LouPanPreSaleCrawler {
         // step2.2 - 打开页面
         driver.get(preSaleUrl);
         driver.manage().timeouts().implicitlyWait(3L, TimeUnit.SECONDS);
-        do {
-            // step 2.3 - 解析页面内容
-            this.parseItems();
-            // step 3 - 获取下一页按钮
-            WebElement nextPage = driver.findElement(By.xpath("/html/body/div[4]/div/div/div[1]/div/dl/dd/div[1]/div[12]/a[10]"));
-            // step 4 - 刷新进入下一页
-            nextPage.click();
-            // step 4.1 - 等待3秒
-            driver.manage().timeouts().implicitlyWait(3L, TimeUnit.SECONDS);
-            // for test break;
-            break;
-        } while (items.size() < tmsfwConfig.getPreSaleCount());
-        // 退出浏览器
-        driver.quit();
+        try {
+            int i=1;
+            do {
+                // step 2.3 - 解析页面内容
+                this.parseItems();
+                i++; // 每次加一页. 一页10条
+                // step 3 - 获取下一页按钮
+                WebElement nextPage = driver.findElement(By.xpath("/html/body/div[4]/div/div/div[1]/div/dl/dd/div[1]/div[12]/a[10]"));
+                // step 4 - 刷新进入下一页
+                nextPage.click();
+                // step 4.1 - 等待3秒
+                driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
+            } while (i*10 < tmsfwConfig.getPreSaleCount());
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            log.error("get next page failed or other element. e: ", e);
+        } finally {
+            // 退出浏览器
+            driver.quit();
+        }
     }
 
     /**
@@ -149,9 +156,9 @@ public class LouPanPreSaleCrawler {
             }
             // 设置爬取时间
             item.setCrawlTime(System.currentTimeMillis());
-            // step3 - 存入容器
-            items.add(item);
-            log.info("item: {}", item);
+            // step3 - 写入数据库
+            log.info("pre sale item: {}", item);
+            louPanService.addPreSaleItem(item);
         }
     }
 

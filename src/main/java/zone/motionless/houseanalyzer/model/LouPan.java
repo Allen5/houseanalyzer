@@ -1,7 +1,10 @@
 package zone.motionless.houseanalyzer.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class LouPan {
     /**
      *

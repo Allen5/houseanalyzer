@@ -43,4 +43,11 @@ public interface LouPanMapper {
      * @mbg.generated Wed Oct 06 19:59:29 CST 2021
      */
     int updateByPrimaryKey(LouPan record);
+
+    /**
+     * 根据楼盘名称获取楼盘信息
+     * @param name
+     * @return
+     */
+    LouPan selectByName(String name);
 }

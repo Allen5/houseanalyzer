@@ -16,12 +16,12 @@ zone:
       tmsfw:
         # 站点域名
         domain: "www.tmsf.com"
-        # cookie字符串
-        cookie-str: "BSFIT_DEVICEID=bEh1FXJgneD1qD5bmxc2qc0kt8_HMgocojAjnDyQ-vec9I191OeU4NVUQ8DwjoAvGFXolll5NO-sp-f546ctodJi5f5tX7fAK7McSTBjm5qBxEdKJqoE-Cr6FHIF61ZlTnUe_y1LQunGJ_LEY5yDQbl3K3FapL0k;Hm_lvt_bbb8b9db5fbc7576fd868d7931c80ee1=1665037985276|1632920784,1633358717;BSFIT_ik19s=q8WzqzBLq8YFH8IXqI,q9iLq9iLq9iLqi,q9iLq9iLq9iLqi;fp_ver=4.7.14;BSFIT_EXPIRATION=1633524714190;"
         # 透明售房网首页
         index-url: "http://www.tmsf.com"
-        # 抓取500条预售证数据
-        pre-sale-count: 500
+        # 新房首页
+        new-house-url: "http://www.tmsf.com/newhouse/property_searchall.htm"
+        # 抓取5000条预售证数据
+        pre-sale-count: 5000
 
 # mysql 设置
 spring:
