@@ -43,15 +43,13 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName=""></table>
-
         <!-- 楼盘信息表 -->
-<!--        <table tableName="loupan" domainObjectName="LouPan"-->
-<!--               enableCountByExample="false"-->
-<!--               enableUpdateByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               enableDeleteByExample="false">-->
-<!--        </table>-->
+        <table tableName="loupan" domainObjectName="LouPan"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableSelectByExample="false"
+               enableDeleteByExample="false">
+        </table>
 
 <!--        &lt;!&ndash; 预售证信息表 &ndash;&gt;-->
 <!--        <table tableName="pre_sale_info" domainObjectName="PreSaleInfo"-->
