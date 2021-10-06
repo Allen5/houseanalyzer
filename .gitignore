@@ -5,3 +5,5 @@ pyvenv.cfg
 __pycache__
 app/crawler/output
 app/.DS_Store
+
+.idea/
