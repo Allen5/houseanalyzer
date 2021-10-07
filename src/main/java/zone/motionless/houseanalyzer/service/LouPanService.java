@@ -8,6 +8,7 @@ import zone.motionless.houseanalyzer.mapper.LouPanMapper;
 import zone.motionless.houseanalyzer.mapper.PreSaleInfoMapper;
 import zone.motionless.houseanalyzer.model.LouPan;
 import zone.motionless.houseanalyzer.model.PreSaleInfo;
+import zone.motionless.houseanalyzer.vo.LouPanItem;
 import zone.motionless.houseanalyzer.vo.LouPanPreSaleItem;
 
 import java.text.ParseException;
@@ -28,7 +29,37 @@ public class LouPanService {
     private PreSaleInfoMapper preSaleInfoMapper;
 
     /**
-     * 添加预售证信息
+     * 添加或更新楼盘信息
+     * @param item
+     */
+    public void addLouPanItem(final LouPanItem item) {
+        // step0: 获取楼盘表中对应的楼盘Id
+        LouPan louPan = louPanMapper.selectByName(item.getName());
+        // step0.1 如果不存在，则创建楼盘记录
+        boolean isModify = null != louPan;
+        if ( null == louPan ) {
+            louPan = new LouPan();
+            louPan.setName(item.getName());
+            louPan.setCreatedAt(new Date());
+            louPan.setStatus(0);
+        }
+        louPan.setType(item.getType());
+        louPan.setLeftCount(item.getLeftCount());
+        louPan.setCount(item.getCount());
+        louPan.setAddress(item.getAddress());
+        louPan.setCurrentSalePrice(item.getCurrentSalePrice());
+        louPan.setTelephone(item.getTelephone());
+        louPan.setUpdatedAt(new Date());
+        // TODO: 处理状态
+        if ( !isModify ) {
+            louPanMapper.insert(louPan);
+        } else {
+            louPanMapper.updateByPrimaryKey(louPan);
+        }
+    }
+
+    /**
+     * 添加或更新预售证信息
      * @param item
      */
     @Transactional

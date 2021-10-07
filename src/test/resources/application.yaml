@@ -5,7 +5,7 @@ server:
 logging:
   level:
     zone:
-      motionless: debug
+      motionless: info
   file:
     name: "logs/application.log"
   pattern:
