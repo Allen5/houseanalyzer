@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zone.motionless.houseanalyzer.mapper.LoupanMapper">
+
+	<resultMap id="BaseResultMap" type="zone.motionless.houseanalyzer.model.Loupan">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+		<result column="left_count" property="leftCount" />
+		<result column="count" property="count" />
+		<result column="address" property="address" />
+		<result column="current_sale_price" property="currentSalePrice" />
+		<result column="telephone" property="telephone" />
+		<result column="status" property="status" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="created_at" property="createdAt" />
+		<result column="updated_at" property="updatedAt" />
+	</resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, name, type, left_count AS leftCount, count, address, current_sale_price AS currentSalePrice, telephone, status, latitude, longitude, created_at AS createdAt, updated_at AS updatedAt
+    </sql>
+</mapper>

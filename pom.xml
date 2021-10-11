@@ -110,25 +110,66 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- mybatis生成器配置 <plugin>-->
-			<!--				<groupId>org.mybatis.generator</groupId>-->
-			<!--				<artifactId>mybatis-generator-maven-plugin</artifactId>-->
-			<!--				<version>1.4.0</version>-->
-			<!--				<dependencies>-->
-			<!--					<dependency>-->
-			<!--						<groupId>mysql</groupId>-->
-			<!--						<artifactId>mysql-connector-java</artifactId>-->
-			<!--						<version>8.0.26</version>-->
-			<!--						<scope>runtime</scope>-->
-			<!--					</dependency>-->
-			<!--				</dependencies>-->
-			<!--				<configuration>-->
-			<!--					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>-->
-			<!--					<verbose>true</verbose>-->
-			<!--					<overwrite>false</overwrite>-->
-			<!--				</configuration>-->
-			<!--			</plugin>-->
-<!--			-->
+			<!-- MyBatis-Plus-Generator -->
+			<plugin>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatisplus-maven-plugin</artifactId>
+				<version>1.0</version>
+				<!-- 下面是一大段配置 -->
+				<configuration>
+					<outputDir>${project.basedir}/src/main/java</outputDir>
+					<!-- 是否覆盖同名文件 -->
+					<fileOverride>false</fileOverride>
+					<!-- 是否开启二级缓存配置 -->
+					<enableCache>false</enableCache>
+					<!-- 开发者名称 -->
+					<author>Allen.Wu</author>
+					<!-- 是否开启 ActiveRecord 模式 -->
+					<activeRecord>true</activeRecord>
+					<!-- 数据源配置 -->
+					<dataSource>
+						<driverName>com.mysql.cj.jdbc.Driver</driverName>
+						<url>jdbc:mysql://127.0.0.1:3306/house_analyze?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;nullCatalogMeansCurrent=true</url>
+						<username>root</username>
+						<password>123456</password>
+					</dataSource>
+					<!-- 策略配置 -->
+					<strategy>
+						<!-- 表名转换策略 -->
+						<naming>underline_to_camel</naming>
+						<fieldNaming>underline_to_camel</fieldNaming>
+						<!-- 主键生成策略 -->
+						<idGenType>auto</idGenType>
+						<!-- 要生成的表 -->
+						<include>
+<!--							<property>crawler_config</property>-->
+<!--							<property>house_price</property>-->
+<!--							<property>loupan</property>-->
+<!--							<property>pre_sale_info</property>-->
+						</include>
+<!--						<superMapperClass>com.baomidou.mybatisplus.core.mapper.BaseMapper</superMapperClass>-->
+<!--						<superServiceClass>com.baomidou.mybatisplus.extension.service.IService</superServiceClass>-->
+<!--						<superServiceImplClass>com.baomidou.mybatisplus.extension.service.impl</superServiceImplClass>-->
+					</strategy>
+					<!-- 生成代码包名设置 -->
+					<packageInfo>
+						<parent>zone.motionless.houseanalyzer</parent>
+						<service>service</service>
+						<serviceImpl>service.impl</serviceImpl>
+						<entity>model</entity>
+						<mapper>mapper</mapper>
+						<xml>xml</xml>
+						<controller>controller</controller>
+					</packageInfo>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>8.0.26</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 
 		</plugins>
 	</build>

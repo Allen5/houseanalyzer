@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CrawlerConfigServiceTest {
 
     @Autowired
-    private CrawlerConfigService crawlerConfigService;
+    private ICrawlerConfigService crawlerConfigService;
 
     @Test
     void getCookies() {

@@ -1,6 +1,6 @@
 package zone.motionless.houseanalyzer.mapper;
 
-import zone.motionless.houseanalyzer.model.CrawlerConfig;
+import zone.motionless.houseanalyzer.model.Loupan;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Allen.Wu
  * @since 2021-10-11
  */
-public interface CrawlerConfigMapper extends BaseMapper<CrawlerConfig> {
+public interface LoupanMapper extends BaseMapper<Loupan> {
 
 }

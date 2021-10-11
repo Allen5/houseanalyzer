@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import zone.motionless.houseanalyzer.config.crawler.TmsfwConfig;
-import zone.motionless.houseanalyzer.service.CrawlerConfigService;
-import zone.motionless.houseanalyzer.service.LouPanService;
+import zone.motionless.houseanalyzer.service.ICrawlerConfigService;
+import zone.motionless.houseanalyzer.service.ILoupanService;
 import zone.motionless.houseanalyzer.vo.LouPanItem;
 
 import java.util.HashMap;
@@ -30,10 +30,10 @@ public class LouPanCrawler extends BaseCrawler {
     private TmsfwConfig tmsfwConfig;
 
     @Autowired
-    private CrawlerConfigService crawlerConfigService;
+    private ICrawlerConfigService crawlerConfigService;
 
     @Autowired
-    private LouPanService louPanService;
+    private ILoupanService louPanService;
 
     /**
      * 价格映射
@@ -70,7 +70,7 @@ public class LouPanCrawler extends BaseCrawler {
         getDriver().manage().timeouts().implicitlyWait(3L, TimeUnit.SECONDS);
 
         // 设置cookies
-        setCookies(crawlerConfigService.getCookies(tmsfwConfig.getDomain()));
+        // setCookies(crawlerConfigService.getCookies(tmsfwConfig.getDomain()));
 
         // 打开页面
         getDriver().get(tmsfwConfig.getNewHouseUrl());
@@ -151,7 +151,7 @@ public class LouPanCrawler extends BaseCrawler {
             // 当前挂牌均价
             item.setCurrentSalePrice(calcPrice(element.findElements(By.xpath("font[@class='colordg']/div[@class='word1']/span"))));
             log.info("item: {}", item);
-            louPanService.addLouPanItem(item);
+            // louPanService.addLouPanItem(item);
         }
     }
 

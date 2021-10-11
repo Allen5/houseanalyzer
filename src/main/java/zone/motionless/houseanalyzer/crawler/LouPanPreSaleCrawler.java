@@ -1,14 +1,16 @@
 package zone.motionless.houseanalyzer.crawler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import zone.motionless.houseanalyzer.config.crawler.TmsfwConfig;
-import zone.motionless.houseanalyzer.service.CrawlerConfigService;
-import zone.motionless.houseanalyzer.service.LouPanService;
+import zone.motionless.houseanalyzer.service.ICrawlerConfigService;
+import zone.motionless.houseanalyzer.service.ILoupanService;
 import zone.motionless.houseanalyzer.vo.LouPanPreSaleItem;
 
 import java.util.ArrayList;
@@ -28,10 +30,10 @@ public class LouPanPreSaleCrawler {
     private TmsfwConfig tmsfwConfig;
 
     @Autowired
-    private CrawlerConfigService crawlerConfigService;
+    private ICrawlerConfigService crawlerConfigService;
 
     @Autowired
-    private LouPanService louPanService;
+    private ILoupanService louPanService;
 
     /**
      * 驱动器
@@ -158,7 +160,7 @@ public class LouPanPreSaleCrawler {
             item.setCrawlTime(System.currentTimeMillis());
             // step3 - 写入数据库
             log.info("pre sale item: {}", item);
-            louPanService.addPreSaleItem(item);
+            // louPanService.addPreSaleItem(item);
         }
     }
 
@@ -166,14 +168,14 @@ public class LouPanPreSaleCrawler {
      * 设置cookie
      */
     private void setCookies() {
-        List<Cookie> cookies = crawlerConfigService.getCookies(tmsfwConfig.getDomain());
-        if ( CollectionUtils.isEmpty(cookies) ) {
-            log.warn("no cookies stored for domain: {}", tmsfwConfig.getDomain());
-            return ;
-        }
-        for (Cookie cookie: cookies) {
-            driver.manage().addCookie(cookie);
-        }
+        // List<Cookie> cookies = crawlerConfigService.getCookies(tmsfwConfig.getDomain());
+//        if ( CollectionUtils.isEmpty(cookies) ) {
+//            log.warn("no cookies stored for domain: {}", tmsfwConfig.getDomain());
+//            return ;
+//        }
+//        for (Cookie cookie: cookies) {
+//            driver.manage().addCookie(cookie);
+//        }
     }
 
     /**
