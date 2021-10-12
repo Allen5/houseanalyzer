@@ -14,12 +14,19 @@
 		<result column="status" property="status" />
 		<result column="latitude" property="latitude" />
 		<result column="longitude" property="longitude" />
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+		<result column="district" property="district"/>
+		<result column="district_code" property="districtCode"/>
 		<result column="created_at" property="createdAt" />
 		<result column="updated_at" property="updatedAt" />
 	</resultMap>
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        id, name, type, left_count AS leftCount, count, address, current_sale_price AS currentSalePrice, telephone, status, latitude, longitude, created_at AS createdAt, updated_at AS updatedAt
+        id, name, type, left_count AS leftCount, count, address, current_sale_price AS currentSalePrice,
+		telephone, status, latitude, longitude, province, city, district, district_code AS districtCode,
+		created_at AS createdAt, updated_at AS updatedAt
     </sql>
+
 </mapper>

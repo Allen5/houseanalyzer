@@ -78,6 +78,18 @@ public class Loupan extends Model<Loupan> {
 	 */
 	private BigDecimal longitude;
 
+	private String province;
+
+	private String city;
+
+	private String district;
+
+	/**
+	 * 区域编码
+	 */
+	@TableField(value = "district_code")
+	private String districtCode;
+
 	/**
 	 * 创建时间
 	 */
@@ -162,6 +174,38 @@ public class Loupan extends Model<Loupan> {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getDistrictCode() {
+		return districtCode;
+	}
+
+	public void setDistrictCode(String districtCode) {
+		this.districtCode = districtCode;
 	}
 
 	public BigDecimal getLatitude() {

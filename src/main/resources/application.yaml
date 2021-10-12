@@ -9,9 +9,10 @@ logging:
     console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n "
     file: "%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n"
 
-# 爬虫设置
+# 服务设置
 zone:
   motionless:
+    # 爬虫设置
     crawler:
       tmsfw:
         # 站点域名
@@ -22,6 +23,17 @@ zone:
         new-house-url: "http://www.tmsf.com/newhouse/property_searchall.htm"
         # 抓取5000条预售证数据
         pre-sale-count: 5000
+    # 位置服务设置
+    location:
+      # 高德API
+      gaode:
+        # key
+        key: "db1d8f34837843dc552d2a1340e94d92"
+        # 域名
+        domain: "https://restapi.amap.com"
+        # 地理编码API
+        geo-api: "/v3/geocode/geo?address=%s&key=%s"
+
 
 # mysql 设置
 spring:
