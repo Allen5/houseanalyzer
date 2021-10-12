@@ -9,8 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zone.motionless.houseanalyzer.config.crawler.TmsfwConfig;
-import zone.motionless.houseanalyzer.service.ICrawlerConfigService;
-import zone.motionless.houseanalyzer.service.ILoupanService;
+import zone.motionless.houseanalyzer.service.CrawConfigService;
+import zone.motionless.houseanalyzer.service.LouPanService;
 import zone.motionless.houseanalyzer.vo.LouPanPreSaleItem;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class LouPanPreSaleCrawler {
     private TmsfwConfig tmsfwConfig;
 
     @Autowired
-    private ICrawlerConfigService crawlerConfigService;
+    private CrawConfigService crawlerConfigService;
 
     @Autowired
-    private ILoupanService louPanService;
+    private LouPanService louPanService;
 
     /**
      * 驱动器

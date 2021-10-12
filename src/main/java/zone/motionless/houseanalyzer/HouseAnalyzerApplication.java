@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan({
 		"zone.motionless.houseanalyzer.mapper",
+		"zone.motionless.houseanalyzer.mapper.extra"
 })
 public class HouseAnalyzerApplication {
 

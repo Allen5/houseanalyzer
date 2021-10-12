@@ -1,17 +1,14 @@
-package zone.motionless.houseanalyzer.service.impl;
+package zone.motionless.houseanalyzer.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import zone.motionless.houseanalyzer.service.ICoordinateService;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CoordinateServiceImplTest {
 
     @Autowired
-    private ICoordinateService coordinateService;
+    private CoordinateService coordinateService;
 
     @Test
     void refreshSingleLouPan() {
@@ -20,6 +17,6 @@ class CoordinateServiceImplTest {
     @Test
     void refreshAllLouPan() {
         // for test
-        coordinateService.refreshAllLouPan(1, 100);
+        // coordinateService.refreshAllLouPan(1, 100);
     }
 }

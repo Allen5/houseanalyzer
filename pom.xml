@@ -59,20 +59,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- mybatis-plus -->
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.4.3.4</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.78</version>
 		</dependency>
-
-		<!-- mybatis-plus 数据库监控插件 -->
-		<dependency>
-			<groupId>p6spy</groupId>
-			<artifactId>p6spy</artifactId>
-			<version>3.9.1</version>
-		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -81,13 +73,19 @@
 			<version>8.0.26</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<!-- mybatis集成 -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.78</version>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.2.0</version>
 		</dependency>
 
+		<!-- myabtis 生成工具依赖 -->
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.4.0</version>
+		</dependency>
 
 
 	</dependencies>
@@ -126,58 +124,19 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- MyBatis-Plus-Generator -->
+
+			<!-- mybatis生成插件 -->
 			<plugin>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatisplus-maven-plugin</artifactId>
-				<version>1.0</version>
-				<!-- 下面是一大段配置 -->
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<!-- 配置信息 -->
 				<configuration>
-					<outputDir>${project.basedir}/src/main/java</outputDir>
-					<!-- 是否覆盖同名文件 -->
-					<fileOverride>false</fileOverride>
-					<!-- 是否开启二级缓存配置 -->
-					<enableCache>false</enableCache>
-					<!-- 开发者名称 -->
-					<author>Allen.Wu</author>
-					<!-- 是否开启 ActiveRecord 模式 -->
-					<activeRecord>true</activeRecord>
-					<!-- 数据源配置 -->
-					<dataSource>
-						<driverName>com.mysql.cj.jdbc.Driver</driverName>
-						<url>jdbc:mysql://127.0.0.1:3306/house_analyze?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;nullCatalogMeansCurrent=true</url>
-						<username>root</username>
-						<password>123456</password>
-					</dataSource>
-					<!-- 策略配置 -->
-					<strategy>
-						<!-- 表名转换策略 -->
-						<naming>underline_to_camel</naming>
-						<fieldNaming>underline_to_camel</fieldNaming>
-						<!-- 主键生成策略 -->
-						<idGenType>auto</idGenType>
-						<!-- 要生成的表 -->
-						<include>
-<!--							<property>crawler_config</property>-->
-<!--							<property>house_price</property>-->
-<!--							<property>loupan</property>-->
-<!--							<property>pre_sale_info</property>-->
-						</include>
-<!--						<superMapperClass>com.baomidou.mybatisplus.core.mapper.BaseMapper</superMapperClass>-->
-<!--						<superServiceClass>com.baomidou.mybatisplus.extension.service.IService</superServiceClass>-->
-<!--						<superServiceImplClass>com.baomidou.mybatisplus.extension.service.impl</superServiceImplClass>-->
-					</strategy>
-					<!-- 生成代码包名设置 -->
-					<packageInfo>
-						<parent>zone.motionless.houseanalyzer</parent>
-						<service>service</service>
-						<serviceImpl>service.impl</serviceImpl>
-						<entity>model</entity>
-						<mapper>mapper</mapper>
-						<xml>xml</xml>
-						<controller>controller</controller>
-					</packageInfo>
+					<configurationFile>${project.basedir}/src/main/resources/generator/generator.xml</configurationFile>
+					<!-- 每次都覆盖 -->
+					<overwrite>true</overwrite>
 				</configuration>
+				<!-- 依赖包 -->
 				<dependencies>
 					<dependency>
 						<groupId>mysql</groupId>
@@ -188,6 +147,16 @@
 			</plugin>
 
 		</plugins>
+		<resources>
+			<!--此处的配置是识别到mapper.xml文件，也可以在application.properties中配置-->
+			<resource>
+				<directory>src/main/java</directory>
+				<!-- 打包时包含mapper的xml信息 -->
+				<includes>
+					<include>${project.basedir}/src/main/resources/mapper/**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 	<repositories>
 		<repository>
