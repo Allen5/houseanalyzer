@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zone.motionless.houseanalyzer.mapper.extra.LouPanExtraMapper">
+
+    <!-- 获取有地址的楼盘记录 -->
+    <select id="fetchValidAddressItems" resultType="zone.motionless.houseanalyzer.model.LouPan">
+        select * from loupan
+        where `address` is not null
+        order by id
+        limit #{offset}, #{count}
+    </select>
+
+</mapper>

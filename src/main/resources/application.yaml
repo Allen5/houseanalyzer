@@ -32,7 +32,7 @@ zone:
         # 域名
         domain: "https://restapi.amap.com"
         # 地理编码API
-        geo-api: "/v3/geocode/geo?address=%s&key=%s"
+        geo-api: "/v3/geocode/geo?city=%s&address=%s&key=%s"
 
 
 # mysql 设置
@@ -46,6 +46,8 @@ spring:
 # mybatis设置
 mybatis:
   mapper-locations: classpath:mapper/*.xml, classpath:mapper/**/*.xml
-  type-aliases-package: zone.motionless.houseanalyzer.models
+  type-aliases-package: zone.motionless.houseanalyzer.model
+  not-empty: true
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

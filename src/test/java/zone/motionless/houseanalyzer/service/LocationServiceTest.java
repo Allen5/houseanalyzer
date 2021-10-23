@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CoordinateServiceImplTest {
+class LocationServiceTest {
 
     @Autowired
-    private CoordinateService coordinateService;
+    private LocationService locationService;
 
     @Test
     void refreshSingleLouPan() {
@@ -16,7 +16,6 @@ class CoordinateServiceImplTest {
 
     @Test
     void refreshAllLouPan() {
-        // for test
-        // coordinateService.refreshAllLouPan(1, 100);
+         locationService.refreshLouPanGeo(1, 100);
     }
 }

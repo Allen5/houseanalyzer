@@ -31,13 +31,10 @@ public class GaodeConfig {
      */
     public String getGeoApi(final String city, final String address) {
         String url = String.format("%s%s", domain, geoApi);
-        try {
-            return URLEncoder.encode(String.format(url, city, address, key), StandardCharsets.UTF_8.name());
-        } catch (UnsupportedEncodingException e) {
-            log.error("urlencode failed: ", e);
-            e.printStackTrace();
-        }
-        return null;
+        return String.format(url,
+                city,
+                address,
+                key);
     }
 
 
